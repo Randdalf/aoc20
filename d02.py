@@ -21,7 +21,7 @@ def parse(data):
 
 def num_valid_passwords_wrong(passwords):
     return sum(
-        low <= sum(int(c == repeated) for c in password) <= high
+        low <= sum(c == repeated for c in password) <= high
         for low, high, repeated, password in passwords
     )
 
