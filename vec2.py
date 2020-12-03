@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Advent of Code 2019, 2d Vector"""
+"""Advent of Code 2020, 2d Vector"""
 
 
 class Vec2:
