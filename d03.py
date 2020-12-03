@@ -2,6 +2,8 @@
 
 """Advent of Code 2020, Day 3"""
 
+from functools import reduce
+
 from aoc import solve
 from vec2 import Vec2
 
@@ -32,5 +34,16 @@ def count_trees(terrain, pos=Vec2(0, 0), slope=Vec2(3, 1)):
     return num_trees
 
 
+def check_slopes(terrain):
+    results = [
+        count_trees(terrain, slope=Vec2(1, 1)),
+        count_trees(terrain, slope=Vec2(3, 1)),
+        count_trees(terrain, slope=Vec2(5, 1)),
+        count_trees(terrain, slope=Vec2(7, 1)),
+        count_trees(terrain, slope=Vec2(1, 2))
+    ]
+    return reduce(lambda x, y: x*y, results)
+
+
 if __name__ == "__main__":
-    solve(3, parse, count_trees)
+    solve(3, parse, count_trees, check_slopes)
