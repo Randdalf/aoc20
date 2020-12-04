@@ -34,7 +34,7 @@ validators = {
     'cid': lambda x: True
 }
 
-required_fields = set(validators.keys()) - {'cid'}
+required_fields = validators.keys() - {'cid'}
 
 
 def parse(data):
