@@ -51,10 +51,7 @@ def has_required_fields(passport):
 
 
 def num_valid_passports(passports):
-    num = 0
-    for passport in passports:
-        num += has_required_fields(passport)
-    return num
+    return sum(has_required_fields(p) for p in passports)
 
 
 def num_valid_passports_strict(passports):
