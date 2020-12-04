@@ -47,7 +47,7 @@ def parse(data):
 
 
 def has_required_fields(passport):
-    return set(passport.keys()) >= required_fields
+    return passport.keys() >= required_fields
 
 
 def num_valid_passports(passports):
