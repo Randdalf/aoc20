@@ -9,20 +9,12 @@ def parse(data):
     yield from data.split('\n')
 
 
-def bsp(left, s):
-    lo = 0
-    hi = (2 << (len(s) - 1)) - 1
-    for c in s:
-        mid = (lo + hi) // 2
-        if c == left:
-            hi = mid
-        else:
-            lo = mid + 1
-    return min(lo, hi)
+def bsp(d0, d1, s):
+    return int(s.replace(d0, '0').replace(d1, '1'), 2)
 
 
 def seat_coord(seat):
-    return (bsp('F', seat[:7]), bsp('L', seat[7:]))
+    return (bsp('F', 'B', seat[:7]), bsp('L', 'R', seat[7:]))
 
 
 def seat_id(row, col):
