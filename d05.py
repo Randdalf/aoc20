@@ -21,15 +21,25 @@ def bsp(left, s):
     return min(lo, hi)
 
 
-def seat_id(seat):
-    row = bsp('F', seat[:7])
-    col = bsp('L', seat[7:])
+def seat_coord(seat):
+    return (bsp('F', seat[:7]), bsp('L', seat[7:]))
+
+
+def seat_id(row, col):
     return row * 8 + col
 
 
 def high_seat_id(seats):
-    return max(seat_id(seat) for seat in seats)
+    return max(seat_id(*seat_coord(seat)) for seat in seats)
+
+
+def find_my_seat(seats):
+    filled = set(seat_coord(seat) for seat in seats)
+    for row in range(9, 120):
+        for col in range(8):
+            if (row, col) not in filled:
+                return seat_id(row, col)
 
 
 if __name__ == "__main__":
-    solve(5, parse, high_seat_id)
+    solve(5, parse, high_seat_id, find_my_seat)
