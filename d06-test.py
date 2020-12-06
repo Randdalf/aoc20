@@ -4,7 +4,7 @@
 
 import unittest
 
-from d06 import parse, count_answers
+from d06 import parse, anyone_answers, everyone_answers
 
 example1 = """abcx
 abcy
@@ -27,12 +27,17 @@ a
 b"""
 
 
-class CountAnswersTests(unittest.TestCase):
+class AnyoneAnswersTests(unittest.TestCase):
     def test_example1(slf):
-        slf.assertEqual(count_answers(parse(example1)), 6)
+        slf.assertEqual(anyone_answers(parse(example1)), 6)
 
     def test_example2(slf):
-        slf.assertEqual(count_answers(parse(example2)), 11)
+        slf.assertEqual(anyone_answers(parse(example2)), 11)
+
+
+class EveryoneAnswersTests(unittest.TestCase):
+    def test_example2(slf):
+        slf.assertEqual(everyone_answers(parse(example2)), 6)
 
 
 if __name__ == "__main__":
