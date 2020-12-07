@@ -16,18 +16,13 @@ def parse(data):
     return rules
 
 
+def has_target(rules, color, target):
+    rule = rules[color]
+    return target in rule or any(has_target(rules, c, target) for c in rule.keys())
+
+
 def num_colors_that_fit(rules, target='shiny gold'):
-    has_target = {color for color, rule in rules.items() if target in rule}
-    no_target = rules.keys() - has_target
-    changes = {''}
-    while len(changes) > 0:
-        changes = {
-            color for color in no_target
-            if not rules[color].keys().isdisjoint(has_target)
-        }
-        has_target |= changes
-        no_target -= changes
-    return len(has_target)
+    return sum(has_target(rules, color, target) for color in rules.keys())
 
 
 def bags_within(rules, target='shiny gold'):
