@@ -30,5 +30,9 @@ def num_colors_that_fit(rules, target='shiny gold'):
     return len(has_target)
 
 
+def bags_within(rules, target='shiny gold'):
+    return sum(n*(1 + bags_within(rules, color)) for color, n in rules[target].items())
+
+
 if __name__ == "__main__":
-    solve(7, parse, num_colors_that_fit)
+    solve(7, parse, num_colors_that_fit, bags_within)
