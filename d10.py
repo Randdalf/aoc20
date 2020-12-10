@@ -28,7 +28,7 @@ def num_combos(n):
 
 def arrangements(adapters):
     diffs = compute_diffs(adapters)
-    runs = [len(list(g)) for k, g in groupby(diffs, lambda x: x == 3) if not k]
+    runs = [len(list(g)) for k, g in groupby(diffs, lambda x: x == 1) if k]
     return reduce(lambda x, y: x*y, (num_combos(n) for n in runs))
 
 
