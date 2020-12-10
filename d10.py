@@ -23,22 +23,13 @@ def jolt_1_3(adapters):
 
 
 def num_combos(n):
-    num = 0
-    if n > 2:
-        num += num_combos(n - 3)
-    if n > 1:
-        num += num_combos(n - 2)
-    if n > 0:
-        num += num_combos(n - 1)
-    if n == 0:
-        num += 1
-    return num
+    return 1 if n == 0 else sum(num_combos(n-k) for k in range(1, min(n, 3)+1))
 
 
 def arrangements(adapters):
     diffs = compute_diffs(adapters)
-    counts = [len(list(g)) for k, g in groupby(diffs, lambda x: x == 3) if not k]
-    return reduce(lambda x, y: x*y, (num_combos(n) for n in counts))
+    runs = [len(list(g)) for k, g in groupby(diffs, lambda x: x == 3) if not k]
+    return reduce(lambda x, y: x*y, (num_combos(n) for n in runs))
 
 
 if __name__ == "__main__":
