@@ -4,7 +4,7 @@
 
 import unittest
 
-from d10 import parse, jolt_diffs
+from d10 import parse, jolt_1_3, arrangements
 
 example1 = """16
 10
@@ -51,12 +51,20 @@ example2 = """28
 3"""
 
 
-class JoltDiffsTest(unittest.TestCase):
+class Jolt13Tests(unittest.TestCase):
     def test_example1(slf):
-        slf.assertEqual(jolt_diffs(parse(example1)), 35)
+        slf.assertEqual(jolt_1_3(parse(example1)), 35)
 
     def test_example2(slf):
-        slf.assertEqual(jolt_diffs(parse(example2)), 220)
+        slf.assertEqual(jolt_1_3(parse(example2)), 220)
+
+
+class ArrangementsTests(unittest.TestCase):
+    def test_example1(slf):
+        slf.assertEqual(arrangements(parse(example1)), 8)
+
+    def test_example2(slf):
+        slf.assertEqual(arrangements(parse(example2)), 19208)
 
 
 if __name__ == "__main__":
