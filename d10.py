@@ -23,7 +23,7 @@ def jolt_1_3(adapters):
 
 
 def num_combos(n):
-    return 1 if n == 0 else sum(num_combos(n-k) for k in range(1, min(n, 3)+1))
+    return 1 if n == 0 else sum(num_combos(n-k-1) for k in range(min(n, 3)))
 
 
 def arrangements(adapters):
