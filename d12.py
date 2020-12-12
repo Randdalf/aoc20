@@ -26,14 +26,14 @@ class Ship1:
 
     def L(slf, value):
         for i in range(value//90):
-            slf.dir = Vec2(slf.dir.y, -slf.dir.x)
+            slf.dir = slf.dir.rot90left()
 
     def R(slf, value):
         for i in range(value//90):
-            slf.dir = Vec2(-slf.dir.y, slf.dir.x)
+            slf.dir = slf.dir.rot90right()
 
     def F(slf, value):
-        slf.pos += Vec2(value*slf.dir.x, value*slf.dir.y)
+        slf.pos += value * slf.dir
 
 
 class Ship2:
@@ -55,14 +55,14 @@ class Ship2:
 
     def L(slf, value):
         for i in range(value//90):
-            slf.waypoint = Vec2(slf.waypoint.y, -slf.waypoint.x)
+            slf.waypoint = slf.waypoint.rot90left()
 
     def R(slf, value):
         for i in range(value//90):
-            slf.waypoint = Vec2(-slf.waypoint.y, slf.waypoint.x)
+            slf.waypoint = slf.waypoint.rot90right()
 
     def F(slf, value):
-        slf.pos += Vec2(value*slf.waypoint.x, value*slf.waypoint.y)
+        slf.pos += value * slf.waypoint
 
 
 def parse(data):
