@@ -4,26 +4,13 @@
 
 from aoc import solve
 
-from vec2 import Vec2
-
-dirs = [Vec2(1, 0), Vec2(0, 1), Vec2(-1, 0), Vec2(0, -1)]
+from vec2 import Vec2, manhattan
 
 
-def turn(dir, n):
-    return dirs[(dirs.index(dir) + n) % len(dirs)]
-
-
-class Ferry:
+class Ship1:
     def __init__(slf):
         slf.pos = Vec2(0, 0)
         slf.dir = Vec2(1, 0)
-
-    def navigate(slf, instrs):
-        for action, value in instrs:
-            getattr(slf, action)(value)
-
-    def dist(slf):
-        return abs(slf.pos.x) + abs(slf.pos.y)
 
     def N(slf, value):
         slf.pos += Vec2(0, -value)
@@ -38,24 +25,63 @@ class Ferry:
         slf.pos += Vec2(-value, 0)
 
     def L(slf, value):
-        slf.dir = turn(slf.dir, -value//90)
+        for i in range(value//90):
+            slf.dir = Vec2(slf.dir.y, -slf.dir.x)
 
     def R(slf, value):
-        slf.dir = turn(slf.dir, value//90)
+        for i in range(value//90):
+            slf.dir = Vec2(-slf.dir.y, slf.dir.x)
 
     def F(slf, value):
         slf.pos += Vec2(value*slf.dir.x, value*slf.dir.y)
+
+
+class Ship2:
+    def __init__(slf):
+        slf.pos = Vec2(0, 0)
+        slf.waypoint = Vec2(10, -1)
+
+    def N(slf, value):
+        slf.waypoint += Vec2(0, -value)
+
+    def S(slf, value):
+        slf.waypoint += Vec2(0, value)
+
+    def E(slf, value):
+        slf.waypoint += Vec2(value, 0)
+
+    def W(slf, value):
+        slf.waypoint += Vec2(-value, 0)
+
+    def L(slf, value):
+        for i in range(value//90):
+            slf.waypoint = Vec2(slf.waypoint.y, -slf.waypoint.x)
+
+    def R(slf, value):
+        for i in range(value//90):
+            slf.waypoint = Vec2(-slf.waypoint.y, slf.waypoint.x)
+
+    def F(slf, value):
+        slf.pos += Vec2(value*slf.waypoint.x, value*slf.waypoint.y)
 
 
 def parse(data):
     return [(instr[0], int(instr[1:])) for instr in data.split('\n')]
 
 
-def navigate(instrs):
-    ferry = Ferry()
-    ferry.navigate(instrs)
-    return ferry.dist()
+def navigate(ship, instrs):
+    for action, value in instrs:
+        getattr(ship, action)(value)
+    return manhattan(ship.pos, Vec2(0, 0))
+
+
+def navigate1(instrs):
+    return navigate(Ship1(), instrs)
+
+
+def navigate2(instrs):
+    return navigate(Ship2(), instrs)
 
 
 if __name__ == "__main__":
-    solve(12, parse, navigate)
+    solve(12, parse, navigate1, navigate2)
