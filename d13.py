@@ -32,7 +32,7 @@ def earliest_bus(notes):
 
 def contest(notes):
     step = t = 1
-    for n in range(0, len(notes.buses)):
+    for n in range(len(notes.buses)):
         while not all((t + off) % id == 0 for off, id in notes.buses[:n+1]):
             t += step
         step *= notes.buses[n][1]
