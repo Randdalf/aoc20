@@ -24,6 +24,9 @@ example5 = """0
 example6 = """0
 1789,37,47,1889"""
 
+example7 = """0
+2,3,7"""
+
 
 class EarliestBusTests(unittest.TestCase):
     def test_example1(slf):
@@ -48,6 +51,9 @@ class ContestTests(unittest.TestCase):
 
     def test_example6(slf):
         slf.assertEqual(contest(parse(example6)), 1202161486)
+
+    def test_example7(slf):
+        slf.assertEqual(contest(parse(example7)), 26)
 
 
 if __name__ == "__main__":
