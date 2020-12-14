@@ -38,13 +38,12 @@ def initialize_v2(program):
     for a, b in program:
         if a == 'mask':
             c = b.count('X')
-            mask_in = int(b.replace('X', '0'), 2)
             masks = []
             for n in range(1 << b.count('X')):
-                mask = b.replace('1', '0')
+                mask = b
                 for bit in f'{n:0{c}b}':
                     mask = mask.replace('X', bit, 1)
-                masks.append(int(mask, 2) | mask_in)
+                masks.append(int(mask, 2))
         else:
             for mask in masks:
                 mem[(a & ~masks[-1]) | mask] = b
