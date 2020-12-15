@@ -19,5 +19,9 @@ def memory_game(start, max_turns=2020):
     return prev
 
 
+def challenge(start):
+    return memory_game(start, max_turns=30000000)
+
+
 if __name__ == "__main__":
-    solve(15, parse, memory_game)
+    solve(15, parse, memory_game, challenge)
