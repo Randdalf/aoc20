@@ -2,6 +2,8 @@
 
 """Advent of Code 2020, Day 16"""
 
+from functools import reduce
+from operator import mul
 import re
 
 from aoc import solve
@@ -34,22 +36,38 @@ def parse(data):
     return Document(data)
 
 
-def valid(doc, value):
-    for rules in doc.fields.values():
-        for lo, hi in rules:
-            if lo <= value <= hi:
-                return True
-    return False
+def valid(doc, v):
+    return any(lo <= v <= hi for rules in doc.fields.values() for lo, hi in rules)
 
 
 def error_rate(doc):
     error_rate = 0
     for ticket in doc.nearby:
-        for value in ticket:
-            if not valid(doc, value):
-                error_rate += value
+        for v in ticket:
+            if not valid(doc, v):
+                error_rate += v
     return error_rate
 
 
+def identify(doc):
+    tickets = [t for t in doc.nearby if all(valid(doc, v) for v in t)]
+    fields = set(doc.fields.keys())
+    positions = set(range(len(doc.ticket)))
+    assigned = {}
+    while len(fields) > 0:
+        for field in list(fields):
+            rules = doc.fields[field]
+            possible = []
+            for p in positions:
+                n = sum(lo <= t[p] <= hi for t in tickets for lo, hi in rules)
+                if n == len(tickets):
+                    possible.append(p)
+            if len(possible) == 1:
+                position = possible.pop()
+                assigned[field] = position
+                fields.remove(field)
+                positions.remove(position)
+    return reduce(mul, (doc.ticket[assigned[f]] for f in assigned if f.startswith('departure')))
+
 if __name__ == "__main__":
-    solve(16, parse, error_rate)
+    solve(16, parse, error_rate, identify)
