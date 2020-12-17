@@ -20,10 +20,6 @@ def parse(data):
     return init
 
 
-def combine(a, b, op):
-    return tuple(op(x, y) for x, y in zip(a, b))
-
-
 def simulate(init, dim, cycles=6):
     app = tuple(0 for x in range(dim - 2))
     active = set(tuple(i + app) for i in init)
