@@ -30,11 +30,12 @@ def simulate(init, dim, cycles=6):
     offsets = [x for x in product(range(-1, 2), repeat=dim)]
     offsets.remove(tuple(0 for x in range(dim)))
     for cycle in range(cycles):
-        cmin = reduce(lambda a, b: combine(a, b, min), active)
-        cmax = reduce(lambda a, b: combine(a, b, max), active)
+        neighbors = set()
+        for pos in active:
+            for offset in offsets:
+                neighbors.add(tuple(a + b for a, b in zip(pos, offset)))
         new = set()
-        ranges = [range(cmin[i] - 1, cmax[i] + 2) for i in range(dim)]
-        for pos in product(*ranges):
+        for pos in neighbors:
             n = 0
             for offset in offsets:
                 neighbor = tuple(a + b for a, b in zip(pos, offset))
