@@ -4,16 +4,21 @@
 
 import unittest
 
-from d17 import parse, simulate
+from d17 import parse, sim3, sim4
 
 example1 = """.#.
 ..#
 ###"""
 
 
-class SimulateTests(unittest.TestCase):
+class Sim3Tests(unittest.TestCase):
     def test_example1(slf):
-        slf.assertEqual(simulate(parse(example1)), 112)
+        slf.assertEqual(sim3(parse(example1)), 112)
+
+
+class Sim4Tests(unittest.TestCase):
+    def test_example1(slf):
+        slf.assertEqual(sim4(parse(example1)), 848)
 
 
 if __name__ == "__main__":
