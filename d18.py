@@ -2,8 +2,6 @@
 
 """Advent of Code 2020, Day 18"""
 
-from operator import mul, add
-
 from aoc import solve
 
 
