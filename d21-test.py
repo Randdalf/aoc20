@@ -4,7 +4,7 @@
 
 import unittest
 
-from d21 import parse, no_allergens
+from d21 import parse, num_inert, danger_list
 
 example1 = """mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
 trh fvjkl sbzzf mxmxvkd (contains dairy)
@@ -12,9 +12,14 @@ sqjhc fvjkl (contains soy)
 sqjhc mxmxvkd sbzzf (contains fish)"""
 
 
-class NoAllergensTests(unittest.TestCase):
+class NumInertTests(unittest.TestCase):
     def test_example1(slf):
-        slf.assertEqual(no_allergens(parse(example1)), 5)
+        slf.assertEqual(num_inert(parse(example1)), 5)
+
+
+class DangerListTests(unittest.TestCase):
+    def test_example1(slf):
+        slf.assertEqual(danger_list(parse(example1)), 'mxmxvkd,sqjhc,fvjkl')
 
 
 if __name__ == "__main__":
