@@ -4,7 +4,7 @@
 
 import unittest
 
-from d22 import parse, combat
+from d22 import parse, combat, recursive_combat
 
 example1 = """Player 1:
 9
@@ -24,6 +24,11 @@ Player 2:
 class CombatTests(unittest.TestCase):
     def test_example1(slf):
         slf.assertEqual(combat(parse(example1)), 306)
+
+
+class RecursiveCombatTests(unittest.TestCase):
+    def test_example1(slf):
+        slf.assertEqual(recursive_combat(parse(example1)), 291)
 
 
 if __name__ == "__main__":
