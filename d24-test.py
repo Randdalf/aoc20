@@ -4,7 +4,7 @@
 
 import unittest
 
-from d24 import parse, flip_tiles
+from d24 import parse, flip_tiles, art_exhibit
 
 example1 = """sesenwnenenewseeswwswswwnenewsewsw
 neeenesenwnwwswnenewnwwsewnenwseswesw
@@ -31,6 +31,11 @@ wseweeenwnesenwwwswnew"""
 class FlipTilesTests(unittest.TestCase):
     def test_example1(slf):
         slf.assertEqual(flip_tiles(parse(example1)), 10)
+
+
+class ArtExhibitTests(unittest.TestCase):
+    def test_example1(slf):
+        slf.assertEqual(art_exhibit(parse(example1)), 2208)
 
 
 if __name__ == "__main__":
