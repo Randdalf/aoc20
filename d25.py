@@ -9,13 +9,6 @@ def parse(data):
     return [int(x) for x in data.split('\n')]
 
 
-def transform(subject_num, loop_size):
-    n = 1
-    for i in range(loop_size):
-        n = (n * subject_num) % 20201227
-    return n
-
-
 def encryption_key(keys):
     n = 1
     encryption_key = 1
